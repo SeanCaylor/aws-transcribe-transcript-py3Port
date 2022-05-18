@@ -21,6 +21,7 @@ def convert_transcript(infile, outfile):
             try:
                 speaker_labels = results["speaker_labels"]
             except KeyError:  # speaker labels are off; just return the transcript
+                print("something has gone terribly wrong")
                 transcript = results.get("transcripts")[0].get("transcript")
                 writeFile.write(f"{transcript}")
                 return

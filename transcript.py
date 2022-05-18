@@ -12,7 +12,14 @@ def main():
 	with codecs.open(filename+'.txt', 'w', 'utf-8') as w:
 		with codecs.open(filename, 'r', 'utf-8') as f:
 			data=json.loads(f.read())
-			labels = data['results']['speaker_labels']['segments']
+			results = data.get("results")
+			try:
+				labels = data['results']['speaker_labels']['segments']
+			except KeyError:
+				transcript = results.get("transcripts")[0].get("transcript")
+				w.write(f"{transcript}")
+				return
+				
 			speaker_start_times={}
 			for label in labels:
 				for item in label['items']:
