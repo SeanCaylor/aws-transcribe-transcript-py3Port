@@ -7,10 +7,11 @@ def main():
 	import datetime
 	import codecs
 
-	filename=sys.argv[1]
-	print(("Filename: ", filename))
+	filenameRaw=sys.argv[1]
+	filename = filenameRaw[:-5]
+	print((f"Converting file {filename}"))
 	with codecs.open(filename+'.txt', 'w', 'utf-8') as w:
-		with codecs.open(filename, 'r', 'utf-8') as f:
+		with codecs.open(filenameRaw, 'r', 'utf-8') as f:
 			data=json.loads(f.read())
 			results = data.get("results")
 			try:
